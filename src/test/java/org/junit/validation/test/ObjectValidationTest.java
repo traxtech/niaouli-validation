@@ -16,6 +16,8 @@
  */
 package org.junit.validation.test;
 
+import java.util.HashMap;
+import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 import org.junit.Test;
@@ -75,6 +77,73 @@ public class ObjectValidationTest {
             fail();
         } catch (AppException ex) {
             assertThat(ex.getErrors()).containsExactly(new AppError("notNull", "name"));
+        }
+
+    }
+
+    @Test
+    public void testIsInMapVerification() {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("1", 1);
+        map.put("2", 2);
+
+        try {
+            Validation validation = new Validation();
+            validation.verifyThat("1").inField("val").isInMapKeys(map);
+            validation.finish();
+        } catch (AppException ex) {
+            fail();
+        }
+
+        try {
+            Validation validation = new Validation();
+            validation.verifyThat("3").inField("val").isInMapKeys(map);
+            validation.finish();
+            fail();
+        } catch (AppException ex) {
+            assertThat(ex.getErrors()).containsExactly(new AppError("notFound", "val"));
+        }
+
+        try {
+            Validation validation = new Validation();
+            validation.verifyThat("3").inField("val").isInMapKeys(null);
+            validation.finish();
+            fail();
+        } catch (AppException ex) {
+            assertThat(ex.getErrors()).containsExactly(new AppError("notFound", "val"));
+        }
+
+    }
+
+    @Test
+    public void testIsNotInMapVerification() {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("1", 1);
+        map.put("2", 2);
+
+        try {
+            Validation validation = new Validation();
+            validation.verifyThat("3").inField("val").isNotInMapKeys(map);
+            validation.finish();
+        } catch (AppException ex) {
+            fail();
+        }
+
+        try {
+            Validation validation = new Validation();
+            validation.verifyThat("3").inField("val").isNotInMapKeys(null);
+            validation.finish();
+        } catch (AppException ex) {
+            fail();
+        }
+
+        try {
+            Validation validation = new Validation();
+            validation.verifyThat("1").inField("val").isNotInMapKeys(map);
+            validation.finish();
+            fail();
+        } catch (AppException ex) {
+            assertThat(ex.getErrors()).containsExactly(new AppError("duplicate", "val"));
         }
 
     }

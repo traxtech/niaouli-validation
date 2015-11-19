@@ -16,6 +16,8 @@
  */
 package org.niaouli.validation;
 
+import java.util.Map;
+
 /**
  *
  * @author Arnaud Rolly <github@niaouli.org>
@@ -57,4 +59,33 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>> e
         }
         return (F) this;
     }
+
+    /**
+     * Verify that the object is a map keys. . If the verification fails, an
+     * error is added to the validation context with the message "notFound".
+     *
+     * @param map Map to cjeck the object agains the keys.
+     * @return this
+     */
+    public final F isInMapKeys(Map<T, ? extends Object> map) {
+        if (map == null || !map.containsKey(value)) {
+            validation.addError("notFound", null, field);
+        }
+        return (F) this;
+    }
+
+    /**
+     * Verify that the object is not a map keys. . If the verification fails, an
+     * error is added to the validation context with the message "duplicate".
+     *
+     * @param map Map to cjeck the object agains the keys.
+     * @return this
+     */
+    public final F isNotInMapKeys(Map<T, ? extends Object> map) {
+        if (map != null && map.containsKey(value)) {
+            validation.addError("duplicate", null, field);
+        }
+        return (F) this;
+    }
+
 }
