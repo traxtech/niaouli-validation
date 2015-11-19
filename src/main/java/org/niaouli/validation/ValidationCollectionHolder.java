@@ -22,9 +22,11 @@ import java.util.Collection;
  *
  * @author Arnaud Rolly <github@niaouli.org>
  */
-public class ValidationCollectionHolder<T, F extends ValidationCollectionHolder<? extends T, F>> extends ValidationObjectHolder<Collection<? extends T>, F> {
+public class ValidationCollectionHolder<T, F extends ValidationCollectionHolder<? extends T, F>>
+        extends ValidationObjectHolder<Collection<? extends T>, F> {
 
-    public ValidationCollectionHolder(final Validation pValidation, final Collection<? extends T> pValue) {
+    public ValidationCollectionHolder(final Validation pValidation,
+            final Collection<? extends T> pValue) {
         super(pValidation, pValue);
     }
 
@@ -36,7 +38,7 @@ public class ValidationCollectionHolder<T, F extends ValidationCollectionHolder<
      */
     public final F isNotEmpty() {
         if (value == null || value.isEmpty()) {
-            validation.addError("empty", null, field);
+            addError("empty", null, getField());
         }
         return (F) this;
     }
@@ -49,7 +51,7 @@ public class ValidationCollectionHolder<T, F extends ValidationCollectionHolder<
      */
     public final F isEmpty() {
         if (value != null && !value.isEmpty()) {
-            validation.addError("notEmpty", null, field);
+            addError("notEmpty", null, getField());
         }
         return (F) this;
     }

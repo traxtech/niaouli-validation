@@ -22,9 +22,11 @@ import java.util.Collection;
  *
  * @author Arnaud Rolly <github@niaouli.org>
  */
-public class ValidationValidableCollectionHolder extends ValidationCollectionHolder<Validable, ValidationValidableCollectionHolder> {
+public class ValidationValidableCollectionHolder
+        extends ValidationCollectionHolder<Validable, ValidationValidableCollectionHolder> {
 
-    public ValidationValidableCollectionHolder(Validation pValidation, Collection<? extends Validable> pValue) {
+    public ValidationValidableCollectionHolder(final Validation pValidation,
+            final Collection<? extends Validable> pValue) {
         super(pValidation, pValue);
     }
 
@@ -37,12 +39,12 @@ public class ValidationValidableCollectionHolder extends ValidationCollectionHol
         if (value != null) {
             int pos = 0;
             for (Validable validable : value) {
-                if (field != null) {
-                    validation.pushPath(field + "[" + pos + "]");
+                if (getField() != null) {
+                    getValidation().pushPath(getField() + "[" + pos + "]");
                 }
-                validable.validate(validation);
-                if (field != null) {
-                    validation.popPath();
+                validable.validate(getValidation());
+                if (getField() != null) {
+                    getValidation().popPath();
                 }
                 pos++;
             }

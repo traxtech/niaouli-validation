@@ -22,9 +22,11 @@ import java.io.Serializable;
  *
  * @author Arnaud Rolly <github@niaouli.org>
  */
-public class ValidationStringHolder extends ValidationObjectHolder<String, ValidationStringHolder> {
+public class ValidationStringHolder
+        extends ValidationObjectHolder<String, ValidationStringHolder> {
 
-    public ValidationStringHolder(final Validation pValidation, final String pValue) {
+    public ValidationStringHolder(final Validation pValidation,
+            final String pValue) {
         super(pValidation, pValue);
     }
 
@@ -36,7 +38,7 @@ public class ValidationStringHolder extends ValidationObjectHolder<String, Valid
      */
     public final ValidationStringHolder isNotBlank() {
         if (value == null || value.trim().isEmpty()) {
-            validation.addError("blank", null, field);
+            addError("blank", null, getField());
         }
         return this;
     }
@@ -49,7 +51,7 @@ public class ValidationStringHolder extends ValidationObjectHolder<String, Valid
      */
     public final ValidationStringHolder isBlank() {
         if (value != null && !value.trim().isEmpty()) {
-            validation.addError("notBlank", null, field);
+            addError("notBlank", null, getField());
         }
         return this;
     }
@@ -62,7 +64,7 @@ public class ValidationStringHolder extends ValidationObjectHolder<String, Valid
      */
     public final ValidationStringHolder isNotEmpty() {
         if (value == null || value.isEmpty()) {
-            validation.addError("empty", null, field);
+            addError("empty", null, getField());
         }
         return this;
     }
@@ -75,7 +77,7 @@ public class ValidationStringHolder extends ValidationObjectHolder<String, Valid
      */
     public final ValidationStringHolder isEmpty() {
         if (value != null && !value.isEmpty()) {
-            validation.addError("notEmpty", null, field);
+            addError("notEmpty", null, getField());
         }
         return this;
     }
@@ -90,10 +92,11 @@ public class ValidationStringHolder extends ValidationObjectHolder<String, Valid
      */
     public final ValidationStringHolder hasSize(int size) {
         if (value == null) {
-            validation.addError("size", new Serializable[]{size, 0}, field);
+            addError("size", new Serializable[]{size, 0}, getField());
         }
         if (value.length() != size) {
-            validation.addError("size", new Serializable[]{size, value.length()}, field);
+            addError("size", new Serializable[]{size, value.length()},
+                    getField());
         }
         return this;
     }

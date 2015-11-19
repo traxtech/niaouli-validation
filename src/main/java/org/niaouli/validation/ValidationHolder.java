@@ -16,14 +16,16 @@
  */
 package org.niaouli.validation;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Arnaud Rolly <github@niaouli.org>
  */
 public class ValidationHolder<F extends ValidationHolder<F>> {
 
-    protected final Validation validation;
-    protected String field;
+    private final Validation validation;
+    private String field;
 
     public ValidationHolder(final Validation pValidation) {
         validation = pValidation;
@@ -32,5 +34,18 @@ public class ValidationHolder<F extends ValidationHolder<F>> {
     public final F inField(final String pField) {
         field = pField;
         return (F) this;
+    }
+
+    protected final Validation getValidation() {
+        return validation;
+    }
+
+    protected final void addError(final String pMsg,
+            final Serializable[] pParams, final String pField) {
+        validation.addError(pMsg, pParams, pField);
+    }
+
+    protected final String getField() {
+        return field;
     }
 }

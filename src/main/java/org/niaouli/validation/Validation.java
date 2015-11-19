@@ -34,19 +34,21 @@ public class Validation {
     private List<AppError> errors;
     private Stack<String> location;
 
-    public ValidationStringHolder verifyThat(final String value) {
+    public final ValidationStringHolder verifyThat(final String value) {
         return new ValidationStringHolder(this, value);
     }
 
-    public ValidationValidableHolder verifyThat(final Validable value) {
+    public final ValidationValidableHolder verifyThat(final Validable value) {
         return new ValidationValidableHolder(this, value);
     }
 
-    public ValidationValidableCollectionHolder verifyThat(final Collection<? extends Validable> value) {
+    public final ValidationValidableCollectionHolder verifyThat(
+            final Collection<? extends Validable> value) {
         return new ValidationValidableCollectionHolder(this, value);
     }
 
-    public final void addError(final String pMsg, final Serializable[] pParams, final String pField) {
+    public final void addError(final String pMsg, final Serializable[] pParams,
+            final String pField) {
         if (errors == null) {
             errors = new ArrayList<AppError>();
         }

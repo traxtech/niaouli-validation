@@ -22,14 +22,16 @@ import java.util.Map;
  *
  * @author Arnaud Rolly <github@niaouli.org>
  */
-public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>> extends ValidationHolder<F> {
+public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>>
+        extends ValidationHolder<F> {
 
     /**
      * Object to validate.
      */
     protected T value;
 
-    public ValidationObjectHolder(final Validation pValidation, final T pValue) {
+    public ValidationObjectHolder(final Validation pValidation,
+            final T pValue) {
         super(pValidation);
         value = pValue;
     }
@@ -42,7 +44,7 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>> e
      */
     public final F isNotNull() {
         if (value == null) {
-            validation.addError("null", null, field);
+            addError("null", null, getField());
         }
         return (F) this;
     }
@@ -55,7 +57,7 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>> e
      */
     public final F isNull() {
         if (value != null) {
-            validation.addError("notNull", null, field);
+            addError("notNull", null, getField());
         }
         return (F) this;
     }
@@ -67,9 +69,9 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>> e
      * @param map Map to cjeck the object agains the keys.
      * @return this
      */
-    public final F isInMapKeys(Map<T, ? extends Object> map) {
+    public final F isInMapKeys(final Map<T, ? extends Object> map) {
         if (map == null || !map.containsKey(value)) {
-            validation.addError("notFound", null, field);
+            addError("notFound", null, getField());
         }
         return (F) this;
     }
@@ -81,9 +83,9 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>> e
      * @param map Map to cjeck the object agains the keys.
      * @return this
      */
-    public final F isNotInMapKeys(Map<T, ? extends Object> map) {
+    public final F isNotInMapKeys(final Map<T, ? extends Object> map) {
         if (map != null && map.containsKey(value)) {
-            validation.addError("duplicate", null, field);
+            addError("duplicate", null, getField());
         }
         return (F) this;
     }

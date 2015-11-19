@@ -22,7 +22,8 @@ package org.niaouli.validation;
  */
 public class ValidationValidableHolder extends ValidationObjectHolder<Validable, ValidationValidableHolder> {
 
-    public ValidationValidableHolder(Validation pValidation, Validable pValue) {
+    public ValidationValidableHolder(final Validation pValidation,
+            final Validable pValue) {
         super(pValidation, pValue);
     }
 
@@ -33,12 +34,12 @@ public class ValidationValidableHolder extends ValidationObjectHolder<Validable,
      */
     public final ValidationValidableHolder isValid() {
         if (value != null) {
-            if (field != null) {
-                validation.pushPath(field);
+            if (getField() != null) {
+                getValidation().pushPath(getField());
             }
-            value.validate(validation);
-            if (field != null) {
-                validation.popPath();
+            value.validate(getValidation());
+            if (getField() != null) {
+                getValidation().popPath();
             }
         }
         return this;
