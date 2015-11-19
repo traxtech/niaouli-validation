@@ -1,3 +1,3 @@
 # niaouli-validation
 
-Lightweight and fluent validation library.
+Lightweight and fluent Java validation library
