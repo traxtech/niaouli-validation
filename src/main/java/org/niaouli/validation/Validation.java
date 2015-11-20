@@ -38,6 +38,10 @@ public class Validation {
         return new ValidationStringHolder(this, value);
     }
 
+    public final ValidationIntegerHolder verifyThat(final Integer value) {
+        return new ValidationIntegerHolder(this, value);
+    }
+
     public final ValidationValidableHolder verifyThat(final Validable value) {
         return new ValidationValidableHolder(this, value);
     }
