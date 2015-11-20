@@ -16,8 +16,6 @@
  */
 package org.niaouli.validation;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Arnaud Rolly <github@niaouli.org>
@@ -83,21 +81,21 @@ public class ValidationStringHolder
     }
 
     /**
-     * Verify that the string has a given size. If the verification fails, an
-     * error is added to the validation context with the message "size" and two
-     * parameters : the expected size and the actual size.
+     * Returns a ValidationIntegerHolder to do some verifications on the length
+     * of the string.
      *
-     * @param size Expected size
-     * @return this
+     * @return ValidationIntegerHolder with the string length.
      */
-    public final ValidationStringHolder hasSize(int size) {
+    public final ValidationIntegerHolder length() {
+        final ValidationIntegerHolder lengthValidation;
         if (value == null) {
-            addError("size", new Serializable[]{size, 0}, getField());
+            lengthValidation = new ValidationIntegerHolder(getValidation(),
+                    null);
+        } else {
+            lengthValidation = new ValidationIntegerHolder(getValidation(),
+                    value.length());
         }
-        if (value.length() != size) {
-            addError("size", new Serializable[]{size, value.length()},
-                    getField());
-        }
-        return this;
+        lengthValidation.inField(getField() + "[length]");
+        return lengthValidation;
     }
 }

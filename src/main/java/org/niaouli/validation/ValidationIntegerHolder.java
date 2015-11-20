@@ -25,48 +25,58 @@ import java.io.Serializable;
 public class ValidationIntegerHolder
         extends ValidationObjectHolder<Integer, ValidationIntegerHolder> {
 
-    public ValidationIntegerHolder(Validation pValidation, Integer pValue) {
+    public ValidationIntegerHolder(final Validation pValidation,
+            final Integer pValue) {
         super(pValidation, pValue);
     }
 
-    public final ValidationIntegerHolder isGreaterThan(int minValue) {
-        if (value == null || value <= minValue) {
-            addError("notGreaterThan", new Serializable[]{minValue, value}, getField());
+    public final ValidationIntegerHolder isGreaterThan(final int pMinValue) {
+        if (value == null || value <= pMinValue) {
+            addError("notGreaterThan", new Serializable[]{pMinValue, value},
+                    getField());
         }
         return this;
     }
 
-    public final ValidationIntegerHolder isGreaterOrEqualsThan(int minValue) {
-        if (value == null || value < minValue) {
-            addError("notGreaterOrEqualsThan", new Serializable[]{minValue, value}, getField());
+    public final ValidationIntegerHolder isGreaterOrEqualsThan(
+            final int pMinValue) {
+        if (value == null || value < pMinValue) {
+            addError("notGreaterOrEqualsThan",
+                    new Serializable[]{pMinValue, value}, getField());
         }
         return this;
     }
 
-    public final ValidationIntegerHolder isLowerThan(int maxValue) {
-        if (value == null || value >= maxValue) {
-            addError("notLowerThan", new Serializable[]{maxValue, value}, getField());
+    public final ValidationIntegerHolder isLowerThan(final int pMaxValue) {
+        if (value == null || value >= pMaxValue) {
+            addError("notLowerThan", new Serializable[]{pMaxValue, value},
+                    getField());
         }
         return this;
     }
 
-    public final ValidationIntegerHolder isLowerOrEqualsThan(int maxValue) {
-        if (value == null || value > maxValue) {
-            addError("notLowerOrEqualsThan", new Serializable[]{maxValue, value}, getField());
+    public final ValidationIntegerHolder isLowerOrEqualsThan(
+            final int pMaxValue) {
+        if (value == null || value > pMaxValue) {
+            addError("notLowerOrEqualsThan",
+                    new Serializable[]{pMaxValue, value}, getField());
         }
         return this;
     }
 
-    public final ValidationIntegerHolder isEqualsTo(int expectedValue) {
-        if (value == null || !value.equals(expectedValue)) {
-            addError("notEqualsTo", new Serializable[]{expectedValue, value}, getField());
+    public final ValidationIntegerHolder isEqualsTo(final int pExpectedValue) {
+        if (value == null || !value.equals(pExpectedValue)) {
+            addError("notEqualsTo", new Serializable[]{pExpectedValue, value},
+                    getField());
         }
         return this;
     }
 
-    public final ValidationIntegerHolder isDifferentThan(int erroneousValue) {
-        if (value != null && value.equals(erroneousValue)) {
-            addError("notDifferentThan", new Serializable[]{erroneousValue}, getField());
+    public final ValidationIntegerHolder isDifferentThan(
+            final int pErroneousValue) {
+        if (value != null && value.equals(pErroneousValue)) {
+            addError("notDifferentThan", new Serializable[]{pErroneousValue},
+                    getField());
         }
         return this;
     }

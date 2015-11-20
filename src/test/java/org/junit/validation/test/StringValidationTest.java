@@ -16,6 +16,7 @@
  */
 package org.junit.validation.test;
 
+import java.io.Serializable;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 import org.junit.Test;
@@ -142,4 +143,40 @@ public class StringValidationTest {
 
     }
 
+    @Test
+    public void testSize() {
+        try {
+            Validation validation = new Validation();
+            validation.verifyThat((String) null).inField("name").length().isNull();
+            validation.verifyThat((String) "").inField("name").length().isEqualsTo(0);
+            validation.verifyThat((String) "john").inField("name").length().isEqualsTo(4);
+            validation.verifyThat((String) "john").inField("name").length().isGreaterOrEqualsThan(3);
+            validation.verifyThat((String) "john").inField("name").length().isGreaterOrEqualsThan(4);
+            validation.verifyThat((String) "john").inField("name").length().isLowerOrEqualsThan(255);
+            validation.verifyThat((String) "john").inField("name").length().isLowerOrEqualsThan(4);
+            validation.verifyThat((String) "john").inField("name").length().isDifferentThan(42);
+            validation.finish();
+        } catch (AppException ex) {
+            fail();
+        }
+
+        try {
+            Validation validation = new Validation();
+            validation.verifyThat("FKZ").inField("countryCode").length().isEqualsTo(2);
+            validation.finish();
+            fail();
+        } catch (AppException ex) {
+            assertThat(ex.getErrors()).containsExactly(new AppError("notEqualsTo", new Serializable[]{2, 3}, "countryCode[length]"));
+        }
+
+        try {
+            Validation validation = new Validation();
+            validation.verifyThat((String) null).inField("countryCode").length().isEqualsTo(2);
+            validation.finish();
+            fail();
+        } catch (AppException ex) {
+            assertThat(ex.getErrors()).containsExactly(new AppError("notEqualsTo", new Serializable[]{2, null}, "countryCode[length]"));
+        }
+
+    }
 }
