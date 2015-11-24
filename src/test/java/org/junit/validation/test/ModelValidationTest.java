@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.niaouli.exception.AppError;
 import org.niaouli.exception.AppException;
 import org.niaouli.validation.Validation;
+import org.niaouli.validation.ValidationStringHolder;
 
 /**
  *
@@ -48,7 +49,7 @@ public class ModelValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("blank", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_BLANK, "name"));
         }
     }
 
@@ -62,7 +63,7 @@ public class ModelValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("blank", "unit.name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_BLANK, "unit.name"));
         }
     }
 
@@ -76,7 +77,7 @@ public class ModelValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("blank", "groups[0].name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_BLANK, "groups[0].name"));
         }
     }
 

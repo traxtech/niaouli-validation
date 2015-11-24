@@ -23,6 +23,8 @@ import org.junit.Test;
 import org.niaouli.exception.AppError;
 import org.niaouli.exception.AppException;
 import org.niaouli.validation.Validation;
+import org.niaouli.validation.ValidationIntegerHolder;
+import org.niaouli.validation.ValidationStringHolder;
 
 /**
  *
@@ -46,7 +48,7 @@ public class StringValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("blank", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_BLANK, "name"));
         }
 
         try {
@@ -55,7 +57,7 @@ public class StringValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("blank", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_BLANK, "name"));
         }
 
         try {
@@ -64,7 +66,7 @@ public class StringValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("blank", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_BLANK, "name"));
         }
 
     }
@@ -87,7 +89,7 @@ public class StringValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("notBlank", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_NOT_BLANK, "name"));
         }
 
     }
@@ -108,7 +110,7 @@ public class StringValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("empty", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_EMPTY, "name"));
         }
 
         try {
@@ -117,7 +119,7 @@ public class StringValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("empty", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_EMPTY, "name"));
         }
     }
 
@@ -138,7 +140,7 @@ public class StringValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("notEmpty", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_NOT_EMPTY, "name"));
         }
 
     }
@@ -166,7 +168,7 @@ public class StringValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("notEqualsTo", new Serializable[]{2, 3}, "countryCode[length]"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_EQUALS_TO, new Serializable[]{2, 3}, "countryCode[length]"));
         }
 
         try {
@@ -175,7 +177,7 @@ public class StringValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("notEqualsTo", new Serializable[]{2, null}, "countryCode[length]"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_EQUALS_TO, new Serializable[]{2, null}, "countryCode[length]"));
         }
 
     }

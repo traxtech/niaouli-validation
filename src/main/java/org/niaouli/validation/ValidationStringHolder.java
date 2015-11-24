@@ -23,6 +23,18 @@ package org.niaouli.validation;
 public class ValidationStringHolder
         extends ValidationObjectHolder<String, ValidationStringHolder> {
 
+    public static final String MSG_BLANK
+            = "org.niaouli.validation.string.blank";
+
+    public static final String MSG_NOT_BLANK
+            = "org.niaouli.validation.string.notBlank";
+
+    public static final String MSG_EMPTY
+            = "org.niaouli.validation.string.empty";
+
+    public static final String MSG_NOT_EMPTY
+            = "org.niaouli.validation.string.notEmpty";
+
     public ValidationStringHolder(final Validation pValidation,
             final String pValue) {
         super(pValidation, pValue);
@@ -36,7 +48,7 @@ public class ValidationStringHolder
      */
     public final ValidationStringHolder isNotBlank() {
         if (value == null || value.trim().isEmpty()) {
-            addError("blank", null, getField());
+            addError(MSG_BLANK, null, getField());
         }
         return this;
     }
@@ -49,7 +61,7 @@ public class ValidationStringHolder
      */
     public final ValidationStringHolder isBlank() {
         if (value != null && !value.trim().isEmpty()) {
-            addError("notBlank", null, getField());
+            addError(MSG_NOT_BLANK, null, getField());
         }
         return this;
     }
@@ -62,7 +74,7 @@ public class ValidationStringHolder
      */
     public final ValidationStringHolder isNotEmpty() {
         if (value == null || value.isEmpty()) {
-            addError("empty", null, getField());
+            addError(MSG_EMPTY, null, getField());
         }
         return this;
     }
@@ -75,7 +87,7 @@ public class ValidationStringHolder
      */
     public final ValidationStringHolder isEmpty() {
         if (value != null && !value.isEmpty()) {
-            addError("notEmpty", null, getField());
+            addError(MSG_NOT_EMPTY, null, getField());
         }
         return this;
     }

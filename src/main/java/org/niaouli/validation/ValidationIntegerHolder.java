@@ -25,6 +25,24 @@ import java.io.Serializable;
 public class ValidationIntegerHolder
         extends ValidationObjectHolder<Integer, ValidationIntegerHolder> {
 
+    public static final String MSG_NOT_GREATER_THAN
+            = "org.niaouli.validation.integer.notGreaterThan";
+
+    public static final String MSG_NOT_GREATER_OR_EQUALS_THAN
+            = "org.niaouli.validation.integer.notGreaterOrEqualsThan";
+
+    public static final String MSG_NOT_LOWER_THAN
+            = "org.niaouli.validation.integer.notLowerThan";
+
+    public static final String MSG_NOT_LOWER_OR_EQUALS_THAN
+            = "org.niaouli.validation.integer.notLowerOrEqualsThan";
+
+    public static final String MSG_NOT_EQUALS_TO
+            = "org.niaouli.validation.integer.notEqualsTo";
+
+    public static final String MSG_NOT_DIFFERENT_THAN
+            = "org.niaouli.validation.integer.notDifferentThan";
+
     public ValidationIntegerHolder(final Validation pValidation,
             final Integer pValue) {
         super(pValidation, pValue);
@@ -32,7 +50,7 @@ public class ValidationIntegerHolder
 
     public final ValidationIntegerHolder isGreaterThan(final int pMinValue) {
         if (value == null || value <= pMinValue) {
-            addError("notGreaterThan", new Serializable[]{pMinValue, value},
+            addError(MSG_NOT_GREATER_THAN, new Serializable[]{pMinValue, value},
                     getField());
         }
         return this;
@@ -41,7 +59,7 @@ public class ValidationIntegerHolder
     public final ValidationIntegerHolder isGreaterOrEqualsThan(
             final int pMinValue) {
         if (value == null || value < pMinValue) {
-            addError("notGreaterOrEqualsThan",
+            addError(MSG_NOT_GREATER_OR_EQUALS_THAN,
                     new Serializable[]{pMinValue, value}, getField());
         }
         return this;
@@ -49,7 +67,7 @@ public class ValidationIntegerHolder
 
     public final ValidationIntegerHolder isLowerThan(final int pMaxValue) {
         if (value == null || value >= pMaxValue) {
-            addError("notLowerThan", new Serializable[]{pMaxValue, value},
+            addError(MSG_NOT_LOWER_THAN, new Serializable[]{pMaxValue, value},
                     getField());
         }
         return this;
@@ -58,7 +76,7 @@ public class ValidationIntegerHolder
     public final ValidationIntegerHolder isLowerOrEqualsThan(
             final int pMaxValue) {
         if (value == null || value > pMaxValue) {
-            addError("notLowerOrEqualsThan",
+            addError(MSG_NOT_LOWER_OR_EQUALS_THAN,
                     new Serializable[]{pMaxValue, value}, getField());
         }
         return this;
@@ -66,8 +84,8 @@ public class ValidationIntegerHolder
 
     public final ValidationIntegerHolder isEqualsTo(final int pExpectedValue) {
         if (value == null || !value.equals(pExpectedValue)) {
-            addError("notEqualsTo", new Serializable[]{pExpectedValue, value},
-                    getField());
+            addError(MSG_NOT_EQUALS_TO,
+                    new Serializable[]{pExpectedValue, value}, getField());
         }
         return this;
     }
@@ -75,8 +93,8 @@ public class ValidationIntegerHolder
     public final ValidationIntegerHolder isDifferentThan(
             final int pErroneousValue) {
         if (value != null && value.equals(pErroneousValue)) {
-            addError("notDifferentThan", new Serializable[]{pErroneousValue},
-                    getField());
+            addError(MSG_NOT_DIFFERENT_THAN,
+                    new Serializable[]{pErroneousValue}, getField());
         }
         return this;
     }

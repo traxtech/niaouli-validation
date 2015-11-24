@@ -25,6 +25,12 @@ import java.util.Collection;
 public class ValidationCollectionHolder<T, F extends ValidationCollectionHolder<? extends T, F>>
         extends ValidationObjectHolder<Collection<? extends T>, F> {
 
+    public static final String MSG_EMPTY
+            = "org.niaouli.validation.collection.empty";
+
+    public static final String MSG_NOT_EMPTY
+            = "org.niaouli.validation.collection.notEmpty";
+
     public ValidationCollectionHolder(final Validation pValidation,
             final Collection<? extends T> pValue) {
         super(pValidation, pValue);
@@ -38,7 +44,7 @@ public class ValidationCollectionHolder<T, F extends ValidationCollectionHolder<
      */
     public final F isNotEmpty() {
         if (value == null || value.isEmpty()) {
-            addError("empty", null, getField());
+            addError(MSG_EMPTY, null, getField());
         }
         return (F) this;
     }
@@ -51,7 +57,7 @@ public class ValidationCollectionHolder<T, F extends ValidationCollectionHolder<
      */
     public final F isEmpty() {
         if (value != null && !value.isEmpty()) {
-            addError("notEmpty", null, getField());
+            addError(MSG_NOT_EMPTY, null, getField());
         }
         return (F) this;
     }

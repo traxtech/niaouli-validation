@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.niaouli.exception.AppError;
 import org.niaouli.exception.AppException;
 import org.niaouli.validation.Validation;
+import org.niaouli.validation.ValidationObjectHolder;
 
 /**
  *
@@ -47,7 +48,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("null", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NULL, "name"));
         }
 
         try {
@@ -56,7 +57,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("null"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NULL));
         }
     }
 
@@ -76,7 +77,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("notNull", "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NOT_NULL, "name"));
         }
 
     }
@@ -101,7 +102,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("notFound", "val"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NOT_FOUND, "val"));
         }
 
         try {
@@ -110,7 +111,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("notFound", "val"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NOT_FOUND, "val"));
         }
 
     }
@@ -143,7 +144,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError("duplicate", "val"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_FOUND, "val"));
         }
 
     }

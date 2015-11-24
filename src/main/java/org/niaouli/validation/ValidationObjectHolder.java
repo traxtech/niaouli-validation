@@ -25,6 +25,18 @@ import java.util.Map;
 public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>>
         extends ValidationHolder<F> {
 
+    public static final String MSG_NULL
+            = "org.niaouli.validation.object.null";
+
+    public static final String MSG_NOT_NULL
+            = "org.niaouli.validation.object.notNull";
+
+    public static final String MSG_NOT_FOUND
+            = "org.niaouli.validation.object.notFound";
+
+    public static final String MSG_FOUND
+            = "org.niaouli.validation.object.found";
+
     /**
      * Object to validate.
      */
@@ -44,7 +56,7 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>>
      */
     public final F isNotNull() {
         if (value == null) {
-            addError("null", null, getField());
+            addError(MSG_NULL, null, getField());
         }
         return (F) this;
     }
@@ -57,7 +69,7 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>>
      */
     public final F isNull() {
         if (value != null) {
-            addError("notNull", null, getField());
+            addError(MSG_NOT_NULL, null, getField());
         }
         return (F) this;
     }
@@ -71,7 +83,7 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>>
      */
     public final F isInMapKeys(final Map<T, ? extends Object> map) {
         if (map == null || !map.containsKey(value)) {
-            addError("notFound", null, getField());
+            addError(MSG_NOT_FOUND, null, getField());
         }
         return (F) this;
     }
@@ -85,7 +97,7 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>>
      */
     public final F isNotInMapKeys(final Map<T, ? extends Object> map) {
         if (map != null && map.containsKey(value)) {
-            addError("duplicate", null, getField());
+            addError(MSG_FOUND, null, getField());
         }
         return (F) this;
     }
