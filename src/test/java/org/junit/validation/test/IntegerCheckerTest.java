@@ -23,13 +23,15 @@ import org.junit.Test;
 import org.niaouli.exception.AppError;
 import org.niaouli.exception.AppException;
 import org.niaouli.validation.Validation;
-import org.niaouli.validation.ValidationIntegerHolder;
+import org.niaouli.validation.IntegerChecker;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  *
  * @author Arnaud Rolly <github@niaouli.org>
  */
-public class IntegerValidationTest {
+public class IntegerCheckerTest {
 
     @Test
     public void testGreaterThan() {
@@ -48,7 +50,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_GREATER_THAN, new Serializable[]{21, 10}, "age"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_GREATER_THAN, new Serializable[]{21, 10}, "age"));
         }
         // Checks that null is greater that 21 : must fail
         try {
@@ -57,7 +59,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_GREATER_THAN, new Serializable[]{21, null}, "age"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_GREATER_THAN, new Serializable[]{21, null}, "age"));
         }
     }
 
@@ -80,7 +82,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_GREATER_OR_EQUALS_THAN, new Serializable[]{21, 10}, "age"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_GREATER_OR_EQUALS_THAN, new Serializable[]{21, 10}, "age"));
         }
         // Checks that null is greater or equals that 21 : must fail
         try {
@@ -89,7 +91,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_GREATER_OR_EQUALS_THAN, new Serializable[]{21, null}, "age"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_GREATER_OR_EQUALS_THAN, new Serializable[]{21, null}, "age"));
         }
     }
 
@@ -110,7 +112,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_LOWER_THAN, new Serializable[]{65, 73}, "age"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_LOWER_THAN, new Serializable[]{65, 73}, "age"));
         }
         // Checks that null is lower that 21 : must fail
         try {
@@ -119,7 +121,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_LOWER_THAN, new Serializable[]{21, null}, "age"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_LOWER_THAN, new Serializable[]{21, null}, "age"));
         }
     }
 
@@ -142,7 +144,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_LOWER_OR_EQUALS_THAN, new Serializable[]{65, 73}, "age"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_LOWER_OR_EQUALS_THAN, new Serializable[]{65, 73}, "age"));
         }
         // Checks that null is lower or equals to 21 : must fail
         try {
@@ -151,7 +153,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_LOWER_OR_EQUALS_THAN, new Serializable[]{21, null}, "age"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_LOWER_OR_EQUALS_THAN, new Serializable[]{21, null}, "age"));
         }
     }
 
@@ -172,7 +174,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_EQUALS_TO, new Serializable[]{42, 101010}, "mojo"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_EQUALS_TO, new Serializable[]{42, 101010}, "mojo"));
         }
         // Checks that null is equals to 42 : must fail
         try {
@@ -181,7 +183,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_EQUALS_TO, new Serializable[]{42, null}, "mojo"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_EQUALS_TO, new Serializable[]{42, null}, "mojo"));
         }
     }
 
@@ -202,7 +204,7 @@ public class IntegerValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationIntegerHolder.MSG_NOT_DIFFERENT_THAN, new Serializable[]{42}, "mojo"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(IntegerChecker.MSG_NOT_DIFFERENT_THAN, new Serializable[]{42}, "mojo"));
         }
         // Checks that null is different than 42 : must not fail
         try {

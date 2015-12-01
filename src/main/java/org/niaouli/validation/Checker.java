@@ -16,17 +16,36 @@
  */
 package org.niaouli.validation;
 
+import java.io.Serializable;
+
 /**
- * Interface to implements to be validable.
  *
  * @author Arnaud Rolly
  */
-public interface Validable {
+public class Checker<F extends Checker<F>> {
 
-    /**
-     * Validate the object.
-     *
-     * @param pValidation Validation context.
-     */
-    void validate(Validation pValidation);
+    private final Validation validation;
+    private String field;
+
+    public Checker(final Validation pValidation) {
+        validation = pValidation;
+    }
+
+    public final F inField(final String pField) {
+        field = pField;
+        return (F) this;
+    }
+
+    protected final Validation getValidation() {
+        return validation;
+    }
+
+    protected final void addError(final String pMsg,
+            final Serializable[] pParams, final String pField) {
+        validation.addError(pMsg, pParams, pField);
+    }
+
+    protected final String getField() {
+        return field;
+    }
 }

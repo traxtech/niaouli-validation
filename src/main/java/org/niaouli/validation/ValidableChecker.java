@@ -16,36 +16,32 @@
  */
 package org.niaouli.validation;
 
-import java.io.Serializable;
-
 /**
  *
- * @author Arnaud Rolly <github@niaouli.org>
+ * @author Arnaud Rolly
  */
-public class ValidationHolder<F extends ValidationHolder<F>> {
+public class ValidableChecker extends ObjectChecker<Validable, ValidableChecker> {
 
-    private final Validation validation;
-    private String field;
-
-    public ValidationHolder(final Validation pValidation) {
-        validation = pValidation;
+    public ValidableChecker(final Validation pValidation,
+            final Validable pValue) {
+        super(pValidation, pValue);
     }
 
-    public final F inField(final String pField) {
-        field = pField;
-        return (F) this;
-    }
-
-    protected final Validation getValidation() {
-        return validation;
-    }
-
-    protected final void addError(final String pMsg,
-            final Serializable[] pParams, final String pField) {
-        validation.addError(pMsg, pParams, pField);
-    }
-
-    protected final String getField() {
-        return field;
+    /**
+     * Verify that the element is valid.
+     *
+     * @return this
+     */
+    public final ValidableChecker isValid() {
+        if (value != null) {
+            if (getField() != null) {
+                getValidation().pushPath(getField());
+            }
+            value.validate(getValidation());
+            if (getField() != null) {
+                getValidation().popPath();
+            }
+        }
+        return this;
     }
 }

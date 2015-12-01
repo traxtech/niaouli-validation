@@ -24,13 +24,15 @@ import org.junit.Test;
 import org.niaouli.exception.AppError;
 import org.niaouli.exception.AppException;
 import org.niaouli.validation.Validation;
-import org.niaouli.validation.ValidationObjectHolder;
+import org.niaouli.validation.ObjectChecker;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  *
  * @author Arnaud Rolly <github@niaouli.org>
  */
-public class ObjectValidationTest {
+public class ObjectCheckerTest {
 
     @Test
     public void testNotNullVerification() {
@@ -48,7 +50,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NULL, "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ObjectChecker.MSG_NULL, "name"));
         }
 
         try {
@@ -57,7 +59,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NULL));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ObjectChecker.MSG_NULL));
         }
     }
 
@@ -77,7 +79,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NOT_NULL, "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ObjectChecker.MSG_NOT_NULL, "name"));
         }
 
     }
@@ -102,7 +104,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NOT_FOUND, "val"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ObjectChecker.MSG_NOT_FOUND, "val"));
         }
 
         try {
@@ -111,7 +113,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_NOT_FOUND, "val"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ObjectChecker.MSG_NOT_FOUND, "val"));
         }
 
     }
@@ -144,7 +146,7 @@ public class ObjectValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationObjectHolder.MSG_FOUND, "val"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(ObjectChecker.MSG_FOUND, "val"));
         }
 
     }

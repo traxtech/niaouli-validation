@@ -18,10 +18,10 @@ package org.niaouli.validation;
 
 /**
  *
- * @author Arnaud Rolly <github@niaouli.org>
+ * @author Arnaud Rolly
  */
-public class ValidationStringHolder
-        extends ValidationObjectHolder<String, ValidationStringHolder> {
+public class StringChecker
+        extends ObjectChecker<String, StringChecker> {
 
     public static final String MSG_BLANK
             = "org.niaouli.validation.string.blank";
@@ -35,7 +35,7 @@ public class ValidationStringHolder
     public static final String MSG_NOT_EMPTY
             = "org.niaouli.validation.string.notEmpty";
 
-    public ValidationStringHolder(final Validation pValidation,
+    public StringChecker(final Validation pValidation,
             final String pValue) {
         super(pValidation, pValue);
     }
@@ -46,7 +46,7 @@ public class ValidationStringHolder
      *
      * @return this
      */
-    public final ValidationStringHolder isNotBlank() {
+    public final StringChecker isNotBlank() {
         if (value == null || value.trim().isEmpty()) {
             addError(MSG_BLANK, null, getField());
         }
@@ -59,7 +59,7 @@ public class ValidationStringHolder
      *
      * @return this
      */
-    public final ValidationStringHolder isBlank() {
+    public final StringChecker isBlank() {
         if (value != null && !value.trim().isEmpty()) {
             addError(MSG_NOT_BLANK, null, getField());
         }
@@ -72,7 +72,7 @@ public class ValidationStringHolder
      *
      * @return this
      */
-    public final ValidationStringHolder isNotEmpty() {
+    public final StringChecker isNotEmpty() {
         if (value == null || value.isEmpty()) {
             addError(MSG_EMPTY, null, getField());
         }
@@ -85,7 +85,7 @@ public class ValidationStringHolder
      *
      * @return this
      */
-    public final ValidationStringHolder isEmpty() {
+    public final StringChecker isEmpty() {
         if (value != null && !value.isEmpty()) {
             addError(MSG_NOT_EMPTY, null, getField());
         }
@@ -98,13 +98,13 @@ public class ValidationStringHolder
      *
      * @return ValidationIntegerHolder with the string length.
      */
-    public final ValidationIntegerHolder length() {
-        final ValidationIntegerHolder lengthValidation;
+    public final IntegerChecker length() {
+        final IntegerChecker lengthValidation;
         if (value == null) {
-            lengthValidation = new ValidationIntegerHolder(getValidation(),
+            lengthValidation = new IntegerChecker(getValidation(),
                     null);
         } else {
-            lengthValidation = new ValidationIntegerHolder(getValidation(),
+            lengthValidation = new IntegerChecker(getValidation(),
                     value.length());
         }
         lengthValidation.inField(getField() + "[length]");

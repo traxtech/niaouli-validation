@@ -27,28 +27,28 @@ import org.niaouli.exception.AppException;
 /**
  * Validation entry point to do the verifications.
  *
- * @author Arnaud Rolly <github@niaouli.org>
+ * @author Arnaud Rolly
  */
 public class Validation {
 
     private List<AppError> errors;
     private Stack<String> location;
 
-    public final ValidationStringHolder verifyThat(final String value) {
-        return new ValidationStringHolder(this, value);
+    public final StringChecker verifyThat(final String value) {
+        return new StringChecker(this, value);
     }
 
-    public final ValidationIntegerHolder verifyThat(final Integer value) {
-        return new ValidationIntegerHolder(this, value);
+    public final IntegerChecker verifyThat(final Integer value) {
+        return new IntegerChecker(this, value);
     }
 
-    public final ValidationValidableHolder verifyThat(final Validable value) {
-        return new ValidationValidableHolder(this, value);
+    public final ValidableChecker verifyThat(final Validable value) {
+        return new ValidableChecker(this, value);
     }
 
-    public final ValidationValidableCollectionHolder verifyThat(
+    public final ValidableCollectionChecker verifyThat(
             final Collection<? extends Validable> value) {
-        return new ValidationValidableCollectionHolder(this, value);
+        return new ValidableCollectionChecker(this, value);
     }
 
     public final void addError(final String pMsg, final Serializable[] pParams,

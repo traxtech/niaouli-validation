@@ -20,10 +20,10 @@ import java.util.Collection;
 
 /**
  *
- * @author Arnaud Rolly <github@niaouli.org>
+ * @author Arnaud Rolly
  */
-public class ValidationCollectionHolder<T, F extends ValidationCollectionHolder<? extends T, F>>
-        extends ValidationObjectHolder<Collection<? extends T>, F> {
+public class CollectionChecker<T, F extends CollectionChecker<? extends T, F>>
+        extends ObjectChecker<Collection<? extends T>, F> {
 
     public static final String MSG_EMPTY
             = "org.niaouli.validation.collection.empty";
@@ -31,7 +31,7 @@ public class ValidationCollectionHolder<T, F extends ValidationCollectionHolder<
     public static final String MSG_NOT_EMPTY
             = "org.niaouli.validation.collection.notEmpty";
 
-    public ValidationCollectionHolder(final Validation pValidation,
+    public CollectionChecker(final Validation pValidation,
             final Collection<? extends T> pValue) {
         super(pValidation, pValue);
     }

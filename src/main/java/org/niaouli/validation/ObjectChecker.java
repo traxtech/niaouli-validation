@@ -20,10 +20,10 @@ import java.util.Map;
 
 /**
  *
- * @author Arnaud Rolly <github@niaouli.org>
+ * @author Arnaud Rolly
  */
-public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>>
-        extends ValidationHolder<F> {
+public class ObjectChecker<T, F extends ObjectChecker<T, F>>
+        extends Checker<F> {
 
     public static final String MSG_NULL
             = "org.niaouli.validation.object.null";
@@ -42,7 +42,7 @@ public class ValidationObjectHolder<T, F extends ValidationObjectHolder<T, F>>
      */
     protected T value;
 
-    public ValidationObjectHolder(final Validation pValidation,
+    public ObjectChecker(final Validation pValidation,
             final T pValue) {
         super(pValidation);
         value = pValue;

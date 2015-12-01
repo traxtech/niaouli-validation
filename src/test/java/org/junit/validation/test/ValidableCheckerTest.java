@@ -23,13 +23,15 @@ import org.junit.Test;
 import org.niaouli.exception.AppError;
 import org.niaouli.exception.AppException;
 import org.niaouli.validation.Validation;
-import org.niaouli.validation.ValidationStringHolder;
+import org.niaouli.validation.StringChecker;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  *
  * @author Arnaud Rolly <github@niaouli.org>
  */
-public class ModelValidationTest {
+public class ValidableCheckerTest {
 
     @Test
     public void testNoErrors() throws AppException {
@@ -49,7 +51,7 @@ public class ModelValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_BLANK, "name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(StringChecker.MSG_BLANK, "name"));
         }
     }
 
@@ -63,7 +65,7 @@ public class ModelValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_BLANK, "unit.name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(StringChecker.MSG_BLANK, "unit.name"));
         }
     }
 
@@ -77,7 +79,7 @@ public class ModelValidationTest {
             validation.finish();
             fail();
         } catch (AppException ex) {
-            assertThat(ex.getErrors()).containsExactly(new AppError(ValidationStringHolder.MSG_BLANK, "groups[0].name"));
+            assertThat(ex.getErrors()).containsExactly(new AppError(StringChecker.MSG_BLANK, "groups[0].name"));
         }
     }
 

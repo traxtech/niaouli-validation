@@ -16,30 +16,37 @@
  */
 package org.niaouli.validation;
 
+import java.util.Collection;
+
 /**
  *
- * @author Arnaud Rolly <github@niaouli.org>
+ * @author Arnaud Rolly
  */
-public class ValidationValidableHolder extends ValidationObjectHolder<Validable, ValidationValidableHolder> {
+public class ValidableCollectionChecker
+        extends CollectionChecker<Validable, ValidableCollectionChecker> {
 
-    public ValidationValidableHolder(final Validation pValidation,
-            final Validable pValue) {
+    public ValidableCollectionChecker(final Validation pValidation,
+            final Collection<? extends Validable> pValue) {
         super(pValidation, pValue);
     }
 
     /**
-     * Verify that the element is valid.
+     * Verify that all the elements of the collection are valid.
      *
      * @return this
      */
-    public final ValidationValidableHolder isValid() {
+    public final ValidableCollectionChecker areAllValid() {
         if (value != null) {
-            if (getField() != null) {
-                getValidation().pushPath(getField());
-            }
-            value.validate(getValidation());
-            if (getField() != null) {
-                getValidation().popPath();
+            int pos = 0;
+            for (Validable validable : value) {
+                if (getField() != null) {
+                    getValidation().pushPath(getField() + "[" + pos + "]");
+                }
+                validable.validate(getValidation());
+                if (getField() != null) {
+                    getValidation().popPath();
+                }
+                pos++;
             }
         }
         return this;
