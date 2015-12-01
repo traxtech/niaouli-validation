@@ -42,12 +42,17 @@ public class Validation {
         return new IntegerChecker(this, value);
     }
 
-    public final ValidableChecker verifyThat(final Validable value) {
+    public final <T extends Object> CollectionChecker<T, ?> verifyThat(
+            final Collection<? extends T> value) {
+        return new CollectionChecker(this, value);
+    }
+
+    public final ValidableChecker verifyThatValidable(final Validable value) {
         return new ValidableChecker(this, value);
     }
 
-    public final ValidableCollectionChecker verifyThat(
-            final Collection<? extends Validable> value) {
+    public final <T extends Validable> ValidableCollectionChecker verifyThatValidables(
+            final Collection<? extends T> value) {
         return new ValidableCollectionChecker(this, value);
     }
 

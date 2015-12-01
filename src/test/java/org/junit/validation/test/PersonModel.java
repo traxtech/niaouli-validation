@@ -58,7 +58,7 @@ public class PersonModel implements Validable {
     @Override
     public void validate(Validation validation) {
         validation.verifyThat(name).inField("name").isNotBlank();
-        validation.verifyThat(unit).inField("unit").isNotNull().isValid();
-        validation.verifyThat(groups).inField("groups").areAllValid();
+        validation.verifyThatValidable(unit).inField("unit").isNotNull().isValid();
+        validation.verifyThatValidables(groups).inField("groups").areAllValid();
     }
 }
