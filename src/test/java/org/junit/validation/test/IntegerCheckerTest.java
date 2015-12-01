@@ -22,14 +22,12 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.niaouli.exception.AppError;
 import org.niaouli.exception.AppException;
-import org.niaouli.validation.Validation;
 import org.niaouli.validation.IntegerChecker;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import org.niaouli.validation.Validation;
 
 /**
  *
- * @author Arnaud Rolly <github@niaouli.org>
+ * @author Arnaud Rolly
  */
 public class IntegerCheckerTest {
 

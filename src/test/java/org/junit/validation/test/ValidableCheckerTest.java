@@ -17,8 +17,6 @@
 package org.junit.validation.test;
 
 import java.util.Arrays;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.niaouli.exception.AppError;
 import org.niaouli.exception.AppException;
@@ -29,7 +27,7 @@ import static org.junit.Assert.fail;
 
 /**
  *
- * @author Arnaud Rolly <github@niaouli.org>
+ * @author Arnaud Rolly
  */
 public class ValidableCheckerTest {
 

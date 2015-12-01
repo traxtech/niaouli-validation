@@ -20,8 +20,9 @@ import org.niaouli.validation.Validable;
 import org.niaouli.validation.Validation;
 
 /**
+ * Validable object for the Object check test.
  *
- * @author Arnaud Rolly <github@niaouli.org>
+ * @author Arnaud Rolly
  */
 public class GroupModel implements Validable {
 
