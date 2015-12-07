@@ -10,7 +10,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with Niaouli Validation.
- * If not, see http://www.gnu.org/licenses/.
+ * If not, see http://www.gnu.org/licenses/ .
  */
 
 package org.niaouli.validation;
@@ -25,7 +25,7 @@ public interface Validable {
   /**
    * Validate the object.
    *
-   * @param pValidation Validation context.
+   * @param validation Validation context.
    */
   void validate(Validation validation);
 }
