@@ -16,16 +16,30 @@
 package org.niaouli.validation;
 
 /**
- * Interface to implements to be validable.
  *
  * @author Arnaud Rolly
  */
-public interface Validable {
+public class ValidableChecker extends ObjectChecker<Validable, ValidableChecker> {
+
+  public ValidableChecker(final Validation validation, final Validable value) {
+    super(validation, value);
+  }
 
   /**
-   * Validate the object.
+   * Verify that the element is valid.
    *
-   * @param pValidation Validation context.
+   * @return this
    */
-  void validate(Validation validation);
+  public ValidableChecker isValid() {
+    if (value != null) {
+      if (getField() != null) {
+        getValidation().pushPath(getField());
+      }
+      value.validate(getValidation());
+      if (getField() != null) {
+        getValidation().popPath();
+      }
+    }
+    return this;
+  }
 }
