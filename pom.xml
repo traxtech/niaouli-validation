@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.niaouli</groupId>
             <artifactId>exception</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
